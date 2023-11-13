@@ -69,7 +69,7 @@ if (file_exists($file) && is_readable($file)){     // Check file
   <div id="content">
     <h1>Welcome to The Uniform Server</h1>
 
-    <p class="intro">This test page <b>index.php</b> was served from root folder UniServerZ\<b>www</b>
+    <p class="intro">This test BALLS <b>index.php</b> was served from root folder UniServerZ\<b>www</b>
     <span  style='display:<?php print("none")?>'><br /> If no PHP module is installed, Apache returns php directives un-processed.</span>
     </p>
 

@@ -1,0 +1,67 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+#wrapper {
+    width:100%;
+    height: 100%;
+    background-image: url("evie.jpg");
+    background-size: 25%;
+}
+
+#nav-container {
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: blue;
+}
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    height:100%;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    flex: 1;
+}
+
+#logo-container, #link-container, #profile-container {
+    display: inline-block;
+    background-color: white;
+    margin: 5px 10px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 25px;
+    position: relative;
+}
+
+#profile-container, #logo-container {
+    min-width: 20%;
+    width: max-content;
+}
+
+#profile-container img {
+    width: 20px;
+    height: auto;
+}
+
+#link-container {
+    width: 42%;
+    background-color: grey;
+    font-size: 35px;
+}
+#link-container a {
+    margin: 0px 20px;
+    text-decoration: none;
+}

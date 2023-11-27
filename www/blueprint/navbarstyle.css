@@ -1,0 +1,104 @@
+
+
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    
+}
+
+#wrapper {
+    width:100%;
+    height: 100%;
+    background-image: url("evie.jpg");
+    background-size: 25%;
+    font-family: 'Roboto', sans-serif;
+}
+
+#nav-container {
+    width: 100%;
+    height: 70px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    
+}
+
+
+#logo-container, #link-container, #profile-container {
+    background-color: white;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    width: 33.33%;
+    float: left;
+    max-height: 50px;
+    padding: 8px 0;
+    background-color: purple;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+#logo-container p {
+    font-size: 50px;
+}
+#logo-container img {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    
+}
+
+
+
+#profile-container {
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+    justify-content: right;
+
+}
+
+
+
+
+
+#profile-container p {
+    margin-right: 30px;
+}
+#profile-container img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+#profile-container img:last-child {
+    width: 40%;
+    height: 40px;
+}
+
+#link-container {
+    width: 75%;
+    background-color: grey;
+    font-size: 35px;
+    overflow: hidden;
+    align-items: center;
+}
+#link-container a {
+    background-color: green;
+    padding: 5px 50px;
+    margin: 0px 20px;
+    text-decoration: none;
+    border-radius: 50px;
+}

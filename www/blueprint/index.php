@@ -8,9 +8,9 @@
 <body>
 
     <div id="wrapper">
-    <?php include 'sidebar/sidebar.php'; ?>
+        <?php include 'sidebar/sidebar.php'; ?>
 
-        <?php include 'navbar/navbar.php'; ?>
+        
         <!-- Include header.php using PHP -->
         
 
@@ -18,6 +18,7 @@
 
         <!-- Include footer.php using PHP -->
         
-    <div>
+    </div>
+    <?php include 'navbar/navbar.php'; ?>
 </body>
 </html>

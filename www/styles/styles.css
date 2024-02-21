@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'BebasNeue'; /* Define your font family name */
+	src: url('../includes/BebasNeue-Regular.ttf') format('truetype'); /* Path to your .ttf font file */
+  }
+
 html, body {
     background-size: cover;
     margin: 0;
@@ -34,17 +39,18 @@ html, body {
 #logo-container, #buttons-container {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	height: 100%;
 }
 #logo-container {
 	background-color: red;
 	width: 400px;
+	
 }
 #buttons-container {
-	align-items: center;
 	background-color: blue;
 	width: auto;
-	justify-content: flex-end;
+	justify-content: flex-end; /* snap to right end */
 }
 #button {
 	background-color: white;
@@ -56,16 +62,20 @@ html, body {
 
 #icon {
 	margin: 5px;
+	margin-right: 0px;
     position: relative;
-	height: auto;
+	height: 100%;
 	width: auto;
 }
 
 #name {
 	margin: 10px;
+	margin-left: 0px;
     position: relative;
 	height: auto;
 	width: auto;
+	font-family: 'BebasNeue', sans-serif;
+	font-size: 70px;
 }
 
 .header-link {

@@ -21,7 +21,7 @@ a {
 
 .header-container { /* header stuff */
   width: 100%;
-  height: 75px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -63,6 +63,7 @@ a {
 	margin: 10px 2%;
 	text-align: center;
 	justify-content: center;
+	border-radius: 50px;
 }
 
 .button-large {
@@ -142,7 +143,7 @@ a {
 	height: auto;
 	width: auto;
 	font-family: 'BebasNeue', sans-serif;
-	font-size: 70px;
+	font-size: 40px;
 }
 
 
@@ -261,14 +262,85 @@ a {
 
 #page-contents {
 	width: 100%;
-	height: 100%;
-	position: relative;
-	display: block;
+	height: auto;
+	position:relative;
+	display: flex; /* Establish flex container */
+	flex-direction: column;
+	justify-content: center;
+	gap: 15px;
+	align-items: center;
 	overflow: hidden;
 	background-color: red;
-	margin: 0px;
-	padding: 0px;
+	justify-content: center;
+	padding: 20px;
 }
+
+#page-header {
+	background-color: green;
+	width: 95%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px black solid;
+}
+#page-title {
+	margin: 10px;
+}
+
+#card {
+	position: relative;
+	background-color: blue;
+	width: 50%;
+	min-height: 75px;
+	height: auto;
+	border-radius: 15px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+#card-title {
+	font-family: 'BebasNeue', sans-serif;
+	text-align: left;
+	height: max-content;
+	padding: 0;
+	margin: 0;
+}
+
+.card-subsection {
+	width: 100%;
+	min-height: 50px;
+	height: auto;
+	position: relative;
+	background-color: white;
+}
+
+#card-divider {
+	position: relative;
+	width: 85%;
+	height: 0px;
+	background-color: black;
+	margin: 10px;
+	align-self: center;
+	justify-self: center;
+}
+#card-divider-vport {
+	position: relative;
+	width: 85vw;
+	height: 2px;
+	background-color: black;
+	margin: 10px;
+	align-self: center;
+	justify-self: center;
+}
+
+
+
+
+
+
+
 
 #footer {
 	width: 100%;
@@ -276,5 +348,6 @@ a {
 	bottom: 0;
 	background-color: black;
 	position: fixed;
+	z-index:1
 
 }

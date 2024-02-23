@@ -81,15 +81,16 @@ a {
 }
 
 #Profile-picture {
-	background-image: url('../default-pfp.png');
-	background-size: cover;
-	background-position: center;
+	background-color: white;
 	width: 20px;
 	height: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	text-align: center;
 }
 
 #Settings {
-	background-image: url('../cog.png');
 	background-size: cover;
 	background-position: center;
 	width: 20px;

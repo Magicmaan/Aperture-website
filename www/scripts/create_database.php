@@ -13,13 +13,29 @@
 	mysqli_query($conn, $sql) or die("$sql<br/>" . mysqli_error($conn));
 
 
-	$sql = "CREATE TABLE IF NOT EXISTS users (
-				username VARCHAR(8) PRIMARY KEY,
+	$sqlUsers = "CREATE TABLE IF NOT EXISTS users (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				email VARCHAR(100),
+				password VARCHAR(255) NOT NULL,
+				username VARCHAR(8) NOT NULL,
 				forename VARCHAR(30) NOT NULL,
 				surname VARCHAR(50) NOT NULL,
-				type VARCHAR(7) NOT NULL,
-				password VARCHAR(255) NOT NULL
-	        )";
+				type ENUM('student', 'instructor', 'admin') NOT NULL DEFAULT 'student',
+				reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	)";
+	
+	$sqlCourse = "CREATE TABLE IF NOT EXISTS courses (
+				id INT AUTO_INCREMENT PRIMARY KEY,
+				title VARCHAR(255) NOT NULL,
+				description TEXT,
+				
+				start_date DATETIME,
+				end_date DATETIME,
+				reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				instructor_id INT NOT NULL,
+				FOREIGN KEY (instructor_id) REFERENCES users(id)
+	)";
+
 	mysqli_query($conn, $sql) or die("$sql<br/>" . mysqli_error($conn));
 
 	/*

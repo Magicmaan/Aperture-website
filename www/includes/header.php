@@ -20,10 +20,10 @@
 					
 					
 					<div class="button button-widget" id="Profile-picture">
-
+						<i class="fa-regular fa-circle-user"></i>
 					</div>
 					<div class="button button-widget" id="Settings">
-
+						<i class="fa-regular fa-circle-user fa-2xl"></i>
 					</div>
                 
 				</div>

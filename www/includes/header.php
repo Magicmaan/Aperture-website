@@ -8,7 +8,6 @@
 				<div class="buttons-container">
 					<a href="../index.php" class="button button-large">Home</a>
 					<?php
-						session_start();
 						if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"]) { //if logged in do this else that 
 							echo '<a href="../dashboard.php" class="button button-large">Dashboard</a>';
 							echo '<a href="../courses/courses.php" class="button button-large">Courses</a>';

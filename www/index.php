@@ -4,7 +4,6 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/menu.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
-	
 ?>
 
 

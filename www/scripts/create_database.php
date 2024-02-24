@@ -22,6 +22,7 @@
 			forename VARCHAR(30) NOT NULL,
 			surname VARCHAR(50) NOT NULL,
 			type ENUM('student', 'instructor', 'admin') NOT NULL DEFAULT 'student',
+			status ENUM('active','suspended','banned'),
 			reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
@@ -47,14 +48,39 @@
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
 		instructor_id INT NOT NULL,
-		course_id INT NOT NULL,
-	
 		FOREIGN KEY (instructor_id) REFERENCES users(id),
+
+		course_id INT NOT NULL,
 		FOREIGN KEY (course_id) REFERENCES courses(id)
+		
+		
+	)";
+	$sqlAssignmentSubmission = "CREATE TABLE IF NOT EXISTS assignmentsubmissions (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		user_id INT NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(id),
+	
+		assignment_id INT NOT NULL,
+		FOREIGN KEY (assignment_id) REFERENCES assignments(id),
+	
+		resource_id INT NOT NULL,
+		FOREIGN KEY (resource_id) REFERENCES resources(id),
+	
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
-	/*Book table */
-	$sqlBook = "CREATE TABLE IF NOT EXISTS book (
+	$sqlUploads = "CREATE TABLE IF NOT EXISTS uploads (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		user_id INT NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(id),
+		resource_id INT NOT NULL,
+		FOREIGN KEY (resource_id) REFERENCES resources(id),
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
+
+
+	/*Document table */
+	$sqlDocument = "CREATE TABLE IF NOT EXISTS documents (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		title VARCHAR(255) NOT NULL,
 		description TEXT,
@@ -83,12 +109,7 @@
 			course_id INT NOT NULL,
 			FOREIGN KEY (course_id) REFERENCES courses(id)
 	)";
-	mysqli_query($conn, $sqlUser) or die("$sqlUser<br/>" . mysqli_error($conn));
-	mysqli_query($conn, $sqlCourse) or die("$sqlCourse<br/>" . mysqli_error($conn));
-	mysqli_query($conn, $sqlAssignment) or die("$sqlAssignment<br/>" . mysqli_error($conn));
-	mysqli_query($conn, $sqlBook) or die("$sqlBook<br/>" . mysqli_error($conn));
-	mysqli_query($conn, $sqlEnrollment) or die("$sqlEnrollment<br/>" . mysqli_error($conn));
-	
+
 	$sqlResource = "CREATE TABLE IF NOT EXISTS resources (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		filename VARCHAR(512),
@@ -98,7 +119,23 @@
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
+	mysqli_query($conn, $sqlUser) or die("$sqlUser<br/>" . mysqli_error($conn));
+
 	mysqli_query($conn, $sqlResource) or die("$sqlResource<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlCourse) or die("$sqlCourse<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlAssignment) or die("$sqlAssignment<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlAssignmentSubmission) or die("$sqlAssignmentSubmission<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlUploads) or die("$sqlUploads<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlDocument) or die("$sqlDocument<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlEnrollment) or die("$sqlEnrollment<br/>" . mysqli_error($conn));
+	
+	
 	/*
 	$sql = "INSERT INTO users(username, forename, surname)
 						VALUES('08008784', 'Neil', 'Buckley'), 

@@ -1,5 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
+
+	session_start();
 ?>
 
 <!DOCTYPE html>

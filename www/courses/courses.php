@@ -1,10 +1,13 @@
 <?php
+    //courses.php will display all courses of user
+    
+
+
 	$pageTitle = "Simple VLE Homepage"; 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/preamble.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/menu.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
-	
 ?>
 
 
@@ -14,34 +17,50 @@
 
     </div>
 
-    <div id="card-row">
-        <div id="card">
-            <h2 id="card-title">Assignments</h2>
-            <div id="card-contents" class="card-subsection">
-            
-            </div>
-        </div>
-    </div>
+    
 
-    <div id="card-row">
-        <div id="card">
-            <h2 id="card-title">Assignments</h2>
-            <div id="card-contents" class="card-subsection">
+    <div class="card-row">
+        <div class="card">
+            <h2 class="card-title">Assignments</h2>
+            <div class="card-contents card-subsection">
             
             </div>
-            <div id="card-divider"></div>
-            <div id="card-files" class="card-subsection">
+            <div class="card-divider"></div>
+            <div class="card-files card-subsection">
                 <a href="default-pfp.png" download>Boo<a>
             </div>
         </div>
 
-        <div id="card">
-            <h2 id="card-title">Assignments</h2>
-            <div id="card-contents" class="card-subsection">
+        <div class="card">
+            <h2 class="card-title">Assignments</h2>
+            <div class="card-contents card-subsection">
             
             </div>
-            <div id="card-divider"></div>
-            <div id="card-files" class="card-subsection">
+            <div class="card-divider"></div>
+            <div class="card-files card-subsection">
+                <a href="default-pfp.png" download>Boo<a>
+            </div>
+        </div>
+    </div>
+    <div class="card-row">
+        <div class="card">
+            <h2 class="card-title">Assignments</h2>
+            <div class="card-contents card-subsection">
+            
+            </div>
+            <div class="card-divider"></div>
+            <div class="card-files card-subsection">
+                <a href="default-pfp.png" download>Boo<a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Assignments</h2>
+            <div class="card-contents card-subsection">
+            
+            </div>
+            <div class="card-divider"></div>
+            <div class="card-files card-subsection">
                 <a href="default-pfp.png" download>Boo<a>
             </div>
         </div>

@@ -14,28 +14,29 @@
 
     </div>
 
-    <div id="card">
-        <h2 id="card-title">Assignments</h2>
-        <div id="card-contents" class="card-subsection">
+    <div class="card">
+        <h2 class="card-title">Assignments</h2>
+        <div class="card-contents card-subsection">
         
         </div>
-        <div id="card-divider"></div>
-        <div id="card-files" class="card-subsection">
+        <div class="card-divider"></div>
+        <div class="card-files card-subsection">
             <a href="default-pfp.png" download>Boo<a>
         </div>
     </div>
 
 
-    <div id="card-divider-vport"></div>
+    <div class="card-divider-vport"></div>
     
     
 
-    <div id="card">
-        <h2 id="card-title">Assignments 2</h2>
-        <div id="card-files" class="card-subsection">
-            <a href="default-pfp.png" download>Boo<a>
+    <div class="card">
+        <h2 class="card-title">Assignments</h2>
+        <div class="card-contents card-subsection">
+        
         </div>
-        <div id="card-files" class="card-subsection">
+        <div class="card-divider"></div>
+        <div class="card-subsection card-files">
             <a href="default-pfp.png" download>Boo<a>
         </div>
     </div>

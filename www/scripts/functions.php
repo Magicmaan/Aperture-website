@@ -109,7 +109,7 @@ function enrol() {
 			return null;
 		}
 	
-		echo "Courses found: " . $numRows . "<br>";
+		//echo "Courses found: " . $numRows . "<br>";
 		// Rewind the result set pointer
 		mysqli_data_seek($data, 0);
 
@@ -187,6 +187,5 @@ function enrol() {
 
 		$metadata = stat($filepath);
 		echo "$metadata";
-
 	}
 ?>

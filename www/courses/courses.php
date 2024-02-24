@@ -12,89 +12,57 @@
 
 
 <div id="page-contents">
+
     <div id="page-header">
         <h1 id="page-title">Courses</h1>
-
     </div>
 
     
+    <div class="card-container">
+        <?php
+            $data = getEnrollments();
 
-    <div class="card-row">
-        <div class="card">
-            <h2 class="card-title">Assignments</h2>
-            <div class="card-contents card-subsection">
-            
-            </div>
-            <div class="card-divider"></div>
-            <div class="card-files card-subsection">
-                <a href="default-pfp.png" download>Boo<a>
-            </div>
-        </div>
+            if (!isset($data)) {
+                echo "No Courses found";
+                return;
+            }
+            $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+            // Output the data
+            while ($row = mysqli_fetch_assoc($data)) {
+                $course_id = $row['course_id']; // Corrected variable name
 
-        <div class="card">
-            <h2 class="card-title">Assignments</h2>
-            <div class="card-contents card-subsection">
-            
-            </div>
-            <div class="card-divider"></div>
-            <div class="card-files card-subsection">
-                <a href="default-pfp.png" download>Boo<a>
-            </div>
-        </div>
-    </div>
-    <div class="card-row">
-        <div class="card">
-            <h2 class="card-title">Assignments</h2>
-            <div class="card-contents card-subsection">
-            
-            </div>
-            <div class="card-divider"></div>
-            <div class="card-files card-subsection">
-                <a href="default-pfp.png" download>Boo<a>
-            </div>
-        </div>
+                $sqlnew = "SELECT * FROM courses WHERE id = ?";
+                $stmtnew = mysqli_prepare($conn, $sqlnew);
+                mysqli_stmt_bind_param($stmtnew, "s", $course_id); // Corrected variable name
+                mysqli_stmt_execute($stmtnew);
+                $courseData = mysqli_stmt_get_result($stmtnew);
 
-        <div class="card">
-            <h2 class="card-title">Assignments</h2>
-            <div class="card-contents card-subsection">
+                if (!$courseData) {
+                    echo "Error executing query: " . mysqli_error($conn);
+                    return;
+                }
+
+                // Fetch course data
+                $courseRow = mysqli_fetch_assoc($courseData);
+                echo '<div class="card"> 
+                        <a href= http://localhost/courses/view.php?c='. $courseRow["id"]. '></a>
+                        <h2 class="card-title">' . $courseRow['title'] . '</h2>
+                        <div class="card-contents card-subsection">
             
-            </div>
-            <div class="card-divider"></div>
-            <div class="card-files card-subsection">
-                <a href="default-pfp.png" download>Boo<a>
-            </div>
-        </div>
+                        </div>
+                        <div class="card-divider"></div>
+                        
+                      </div>
+                
+                ';
+                //echo  "<a href= " . $_SERVER['DOCUMENT_ROOT'] . '/courses/view.php?course='. $courseRow['id']. ">" . $courseRow['id'] . ": ". $courseRow['title'] . "</a> <br>" ;
+            }
+        ?>
+
     </div>
 </div>
 
-<?php
-	$data = getEnrollments();
 
-    if (!isset($data)) {
-        echo "No Courses found";
-        return;
-    }
-// Output the data
-while ($row = mysqli_fetch_assoc($data)) {
-    $course_id = $row['course_id']; // Corrected variable name
-
-    $sqlnew = "SELECT * FROM courses WHERE id = ?";
-    $stmtnew = mysqli_prepare($conn, $sqlnew);
-    mysqli_stmt_bind_param($stmtnew, "s", $course_id); // Corrected variable name
-    mysqli_stmt_execute($stmtnew);
-    $courseData = mysqli_stmt_get_result($stmtnew);
-
-    if (!$courseData) {
-        echo "Error executing query: " . mysqli_error($conn);
-        return;
-    }
-
-    // Fetch course data
-    $courseRow = mysqli_fetch_assoc($courseData);
-    echo  "<a href= " . $_SERVER['DOCUMENT_ROOT'] . '/courses/view.php?course='. $courseRow['id']. ">" . $courseRow['id'] . ": ". $courseRow['title'] . "</a> <br>" ;
-}
-
-?>
 
 
 

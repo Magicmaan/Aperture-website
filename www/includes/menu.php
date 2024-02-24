@@ -1,9 +1,7 @@
 <div id="menu">
 	<?php
-		$_SESSION["isLoggedIn"] = true;
-		$_SESSION["username"] = "Theo";
 		if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"]) {
-			echo '<div id="menu-title"> Welcome, ' . $_SESSION["username"] . '</div>';
+			echo '<div id="menu-title"> Welcome, ' . $_SESSION["username"] . ' ' . $_SESSION["user_id"] . '</div>';
 		}
 	?>
 	<div id="menu-pullout" class="unselectable">

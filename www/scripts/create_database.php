@@ -88,7 +88,17 @@
 	mysqli_query($conn, $sqlAssignment) or die("$sqlAssignment<br/>" . mysqli_error($conn));
 	mysqli_query($conn, $sqlBook) or die("$sqlBook<br/>" . mysqli_error($conn));
 	mysqli_query($conn, $sqlEnrollment) or die("$sqlEnrollment<br/>" . mysqli_error($conn));
+	
+	$sqlResource = "CREATE TABLE IF NOT EXISTS resources (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		filename VARCHAR(512),
+		filetype VARCHAR(100),
+		filesize INT,
+		filepath VARCHAR(512),
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
 
+	mysqli_query($conn, $sqlResource) or die("$sqlResource<br/>" . mysqli_error($conn));
 	/*
 	$sql = "INSERT INTO users(username, forename, surname)
 						VALUES('08008784', 'Neil', 'Buckley'), 

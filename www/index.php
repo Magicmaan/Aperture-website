@@ -1,9 +1,9 @@
 <?php
 	$pageTitle = "Simple VLE Homepage"; 
-	require_once("includes/preamble.php");
-	require_once("includes/header.php");
-	require_once("includes/menu.php");
-	require_once("scripts/functions.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/preamble.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/menu.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
 	
 ?>
 

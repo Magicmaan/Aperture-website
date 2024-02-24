@@ -287,11 +287,21 @@ a {
 	margin: 10px;
 }
 
+#card-row {
+	width: auto;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+
 #card {
 	position: relative;
 	background-color: blue;
-	width: 50%;
-	min-height: 75px;
+	min-width: 200px;
+	width: 80%;
+	min-height: 200px;
 	height: auto;
 	border-radius: 15px;
 	padding: 10px;

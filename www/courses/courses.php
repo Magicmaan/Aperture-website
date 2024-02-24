@@ -49,12 +49,12 @@
 </div>
 
 <?php
-    $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
-		
 	$data = getEnrollments();
-    
 
-
+    if (!isset($data)) {
+        echo "No Courses found";
+        return;
+    }
 // Output the data
 while ($row = mysqli_fetch_assoc($data)) {
     $course_id = $row['course_id']; // Corrected variable name

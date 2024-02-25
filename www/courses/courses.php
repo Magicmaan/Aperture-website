@@ -8,6 +8,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/menu.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/courses/coursefunctions.php");
 ?>
 
 
@@ -20,42 +21,19 @@
     
     <div class="card-container">
         <?php
-            $data = getEnrollments();
-
-            if (!isset($data)) {
-                echo "No Courses found";
-                return;
-            }
-            $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+            getEnrollments();
+            getCourses();
             // Output the data
-            while ($row = mysqli_fetch_assoc($data)) {
-                $course_id = $row['course_id']; // Corrected variable name
-
-                $sqlnew = "SELECT * FROM courses WHERE id = ?";
-                $stmtnew = mysqli_prepare($conn, $sqlnew);
-                mysqli_stmt_bind_param($stmtnew, "s", $course_id); // Corrected variable name
-                mysqli_stmt_execute($stmtnew);
-                $courseData = mysqli_stmt_get_result($stmtnew);
-
-                if (!$courseData) {
-                    echo "Error executing query: " . mysqli_error($conn);
-                    return;
-                }
-
-                // Fetch course data
-                $courseRow = mysqli_fetch_assoc($courseData);
+            foreach ($_SESSION['getCourses'] as $course_id => $courseData) {
                 echo '<div class="card"> 
-                        <a href= http://localhost/courses/view.php?c='. $courseRow["id"]. '></a>
-                        <h2 class="card-title">' . $courseRow['title'] . '</h2>
+                    <a href= http://localhost/courses/view.php?c='. $courseData["id"]. '></a>
+                    <h2 class="card-title">' . $courseData['title'] . '</h2>
                         <div class="card-contents card-subsection">
-            
                         </div>
                         <div class="card-divider"></div>
-                        
-                      </div>
-                
+                    </div>
                 ';
-                //echo  "<a href= " . $_SERVER['DOCUMENT_ROOT'] . '/courses/view.php?course='. $courseRow['id']. ">" . $courseRow['id'] . ": ". $courseRow['title'] . "</a> <br>" ;
+                // Output other course details as needed
             }
         ?>
 

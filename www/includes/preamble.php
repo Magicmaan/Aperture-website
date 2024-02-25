@@ -2,6 +2,22 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/scripts/functions.php");
 
 	session_start();
+	$_SESSION['cacheTimeout'] = 5;
+
+	if ($_SESSION['cacheTimer'] > $_SESSION['cacheTimeout']++) {
+		$_SESSION['cacheTimer'] = 0;
+	}
+
+	if(isset($_SESSION['cacheTimer'])) {
+		// Increment the counter
+		$_SESSION['cacheTimer']++;
+	} else {
+		// Initialize the counter
+		$_SESSION['cacheTimer'] = 0;
+	}
+	
+
+	echo $_SESSION['cacheTimer'];
 ?>
 
 <!DOCTYPE html>

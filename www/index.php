@@ -12,6 +12,6 @@
 </div>
 
 <?php
-	require_once("includes/footer.php");
-	require_once("includes/postamble.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/postamble.php");
 ?>

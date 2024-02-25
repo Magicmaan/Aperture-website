@@ -84,55 +84,8 @@ function enrol() {
 
 		return $loginResult;
 	}
-
-	function getEnrollments() {
-		if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
-			return null;	
-		}
-
-		$conn = mysqli_connect("localhost", "root", "root", "aperturebase");
-		$user_id = $_SESSION["user_id"];
-		$sql = "SELECT * FROM enrollments WHERE user_id = ?";
-		$stmt = mysqli_prepare($conn, $sql);
-		mysqli_stmt_bind_param($stmt, "s", $user_id);
-		mysqli_stmt_execute($stmt);
-		$data = mysqli_stmt_get_result($stmt);
 	
-		if (!$data) {
-			echo "Error executing query: " . mysqli_error($conn);
-			return;
-		}
 	
-		$numRows = mysqli_num_rows($data);
-		if ($numRows == 0) {
-			echo "No courses";
-			return null;
-		}
-	
-		//echo "Courses found: " . $numRows . "<br>";
-		// Rewind the result set pointer
-		mysqli_data_seek($data, 0);
-
-		return $data;
-	}
-
-	function getAssignments($course_id) {
-		if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
-			return null;	
-		}
-		if (!isset($course_id)) {
-			return null;
-		}
-
-		$conn = mysqli_connect("localhost", "root", "root", "aperturebase");
-		$sql = "SELECT * FROM assignments WHERE course_id = ?";
-		$stmt = mysqli_prepare($conn, $sql);
-		mysqli_stmt_bind_param($stmt, "s", $course_id);
-		mysqli_stmt_execute($stmt);
-		$data = mysqli_stmt_get_result($stmt);
-
-		return $data;
-	}
 
 	function getResource($resource_id) {
 		// Check if $resource_id is set

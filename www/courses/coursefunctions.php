@@ -63,7 +63,7 @@ function getAssignments($course_id) {
     return $data;
 }
 
-function getCourses() {
+function getCourses() { //issue in here??
     // Check if the course data is already cached in the session
     if (isset($_SESSION['getCourses']) || $_SESSION['cacheTimer'] < $_SESSION['cacheTimeout']) {
         return $_SESSION['getCourses'];

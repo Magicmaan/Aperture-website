@@ -63,14 +63,12 @@ function getAssignments($course_id) {
     return $data;
 }
 
-function getCourses() { //issue in here??
-    // Check if the course data is already cached in the session
-    if (isset($_SESSION['getCourses']) || $_SESSION['cacheTimer'] < $_SESSION['cacheTimeout']) {
-        return $_SESSION['getCourses'];
-    }
-
+function getCourses() {
     // Initialize the session cache array if not already set
-    $_SESSION['getCourses'] = [];
+    if (!isset($_SESSION['getCourses'])) {
+        $_SESSION['getCourses'] = [];
+    }
+    $data = getEnrollments();
 
     // Connect to the database
     $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
@@ -82,7 +80,7 @@ function getCourses() { //issue in here??
     }
 
     // Execute the query to fetch enrollments
-    $data = $_SESSION['getEnrollments'];
+    
 
     // Loop through the query results and cache them in the session
     while ($row = mysqli_fetch_assoc($data)) {
@@ -99,12 +97,15 @@ function getCourses() { //issue in here??
             return;
         }
 
-        // Fetch course data
-        $courseRow = mysqli_fetch_assoc($courseData);
-
-        // Cache the course data in the session
-        $_SESSION['getCourses'][$courseRow["id"]] = $courseRow;
+        // Fetch course data inside the loop without closing the result set
+        while ($courseRow = mysqli_fetch_assoc($courseData)) {
+            // Cache the course data in the session
+            $_SESSION['getCourses'][$courseRow["id"]] = $courseRow;
+        }
     }
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmtnew);
 
     // Close the database connection
     mysqli_close($conn);

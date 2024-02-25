@@ -15,8 +15,6 @@
 		// Initialize the counter
 		$_SESSION['cacheTimer'] = 0;
 	}
-	
-
 	echo $_SESSION['cacheTimer'];
 ?>
 

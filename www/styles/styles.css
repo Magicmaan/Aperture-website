@@ -300,6 +300,7 @@ a {
 	align-items: center;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto-fill columns with a minimum width of 200px */
+	flex-grow: 1;
     grid-gap: 10px; /* Gap between grid items */
 	overflow: hidden;
 }
@@ -346,15 +347,7 @@ a {
 	background-color: white;
 }
 
-.header {
-	position: relative;
-	width: 85%;
-	height: 0px;
-	background-color: black;
-	margin: 10px;
-	align-self: center;
-	justify-self: center;
-}
+
 .card-divider-vport {
 	position: relative;
 	width: 85vw;

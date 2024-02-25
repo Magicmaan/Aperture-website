@@ -52,4 +52,10 @@ if(isset($_GET['c'])) {
     // If ID parameter is not present in the URL, handle it accordingly
     echo "No ID parameter found in the URL.";
 }
+
+
+
+//send temp code for link under token auth
+//on timer, prompt user to update caches
 ?>
+

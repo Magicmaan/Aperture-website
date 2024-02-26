@@ -45,7 +45,6 @@ function enrol() {
 	}
 
 	function login() {
-		$loginSuccess = true;
 		$email = $_POST["username"];
 		$password = md5($_POST["password"]);
 
@@ -65,9 +64,8 @@ function enrol() {
 
 		$numRows = mysqli_num_rows($data);
 		if ($numRows == 0) {
-			$loginSuccess = false;
 			$loginResult = "<p style='color: red'>LOGIN FAILED!!</p>";	
-			return;
+			return $loginResult;
 		}
 		
 		$row = mysqli_fetch_assoc($data);
@@ -75,17 +73,109 @@ function enrol() {
         $user_id = $row['id'];
 		$username = $row['username'];
 
-		$loginResult = "<p style='color: green'>You have successfully logged in as $username.</p>";
+		
 
 		session_start();
 		$_SESSION["isLoggedIn"] = true;
 		$_SESSION["username"] = $username;
 		$_SESSION["user_id"] = $user_id;
 
+		getPFP(true);
+		$loginResult = "<p style='color: green'>You have successfully logged in as $username.</p>";
 		return $loginResult;
 	}
 	
-	
+	function getPFP($id) {
+		
+		$conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+		$user_id = $_SESSION["user_id"];
+		$sql = "SELECT *
+				FROM resources
+				WHERE id = ?
+		";
+		$stmt = mysqli_prepare($conn, $sql);
+		mysqli_stmt_bind_param($stmt, "i", $id);
+		mysqli_stmt_execute($stmt);
+		$data = mysqli_stmt_get_result($stmt);
+		if (!$data) {
+			echo "Error executing query: " . mysqli_error($conn);
+			return;
+		}
+
+        foreach ($data as $row) {
+			echo($row["filepath"]);
+		}
+
+		//cool code, but switching how its done i Don't like the long load times so using ajax instead
+		/*if (isset($_SESSION["profilepicture"])) {
+		//	return $_SESSION["profilepicture"];
+		//}
+		
+
+
+
+			
+		$_SESSION["profilepicture"] = null;
+		if (!(isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"])) {
+			$_SESSION["profilepicture"] = "../resources/default-pfp.png";
+		}
+		//caches enrollment data
+		if (isset($_SESSION["profilepicture"]) && (!$update)) {
+			return $_SESSION["profilepicture"];
+		}
+		$conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+		$user_id = $_SESSION["user_id"];
+
+		$sql = "SELECT *
+				FROM userdata
+				JOIN resources ON userdata.profilepicture = resources.id
+				WHERE userdata.user_id = ?
+		";
+		$stmt = mysqli_prepare($conn, $sql);
+		mysqli_stmt_bind_param($stmt, "i", $user_id);
+		mysqli_stmt_execute($stmt);
+		$data = mysqli_stmt_get_result($stmt);
+		if (!$data) {
+			echo "Error executing query: " . mysqli_error($conn);
+			return;
+		}
+
+        foreach ($data as $row) {
+
+
+			if (!isset($row["filepath"])) {
+				$_SESSION["profilepicture"] = "../resources/default-pfp.png";
+			}
+			$_SESSION["profilepicture"] = ".." . $row["filepath"];
+		}
+
+ 
+		return $_SESSION["profilepicture"];*/
+	}
+
+	function printNestedArray($array, $indent = 0) {
+		echo "boo";
+		foreach ($array as $key => $value) {
+			// Add indentation based on the depth of the nested array
+			echo str_repeat('&nbsp;', $indent * 4);
+			
+			// Print the key if it exists
+			if (is_string($key)) {
+				echo "$key: ";
+			}
+			
+			// Print the value
+			if (is_array($value)) {
+				// If the value is an array, recursively call the function
+				echo "<br>";
+				printNestedArray($value, $indent + 1);
+			} else {
+				// If the value is not an array, simply print it
+				echo "$value<br>";
+			}
+		}
+	}
+
 
 	function getResource($resource_id) {
 		// Check if $resource_id is set

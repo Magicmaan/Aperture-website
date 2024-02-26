@@ -82,14 +82,17 @@ a {
 }
 
 .Profile-picture {
-	background-color: white;
 	width: 20px;
 	height: 20px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	text-align: center;
+
+	background-size: cover;
 }
+
+
 
 .Settings {
 	background-size: cover;

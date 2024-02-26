@@ -1,0 +1,20 @@
+workflow idea:
+
+php backend (obviously), functions contained in whatever
+have middle man files that work through api
+use jquery and AJAX to pull data from backend
+populate frontend using jquery, css, html
+
+todo: 
+	rework literally every fucking function (not hard)
+	implement api? key system by requesting address using one time api keys?
+	
+	i.e.
+	
+	localhost/request/getProfilepicture.php?key=12345
+	
+	on key usage, generate new key thats linked to php stuff
+	
+	
+	key is found from php on page load under table tokens. It uses the current session in order to validate actions on both sides
+	by user signing in and starting session, you validate that your session is you. Can then pull api / session 

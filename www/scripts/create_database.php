@@ -26,6 +26,29 @@
 			reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
+	$sqlToken = "CREATE TABLE IF NOT EXISTS tokens (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		token VARCHAR(64),
+		user_id INT NOT NULL,
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
+
+	$sqlUserData = "CREATE TABLE IF NOT EXISTS userdata (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		user_id INT NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(id),
+		profilepicture int NOT NULL,
+		FOREIGN KEY (profilepicture) REFERENCES resources(id),
+
+		username VARCHAR(255) NOT NULL, -- Adjusted length for username
+		forename VARCHAR(30) NOT NULL,
+		surname VARCHAR(50) NOT NULL,
+		type ENUM('student', 'instructor', 'admin') NOT NULL DEFAULT 'student',
+		status ENUM('active','suspended','banned'),
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
+
 	/*Courses table */
 	$sqlCourse = "CREATE TABLE IF NOT EXISTS courses (
 				id INT AUTO_INCREMENT PRIMARY KEY,
@@ -121,7 +144,11 @@
 
 	mysqli_query($conn, $sqlUser) or die("$sqlUser<br/>" . mysqli_error($conn));
 
+	mysqli_query($conn, $sqlToken) or die("$sqlToken<br/>" . mysqli_error($conn));
+
 	mysqli_query($conn, $sqlResource) or die("$sqlResource<br/>" . mysqli_error($conn));
+
+	mysqli_query($conn, $sqlUserData) or die("$sqlUserData<br/>" . mysqli_error($conn));
 
 	mysqli_query($conn, $sqlCourse) or die("$sqlCourse<br/>" . mysqli_error($conn));
 

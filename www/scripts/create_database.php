@@ -30,7 +30,6 @@
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		token VARCHAR(64),
 		user_id INT NOT NULL,
-		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
@@ -40,12 +39,6 @@
 		FOREIGN KEY (user_id) REFERENCES users(id),
 		profilepicture int NOT NULL,
 		FOREIGN KEY (profilepicture) REFERENCES resources(id),
-
-		username VARCHAR(255) NOT NULL, -- Adjusted length for username
-		forename VARCHAR(30) NOT NULL,
-		surname VARCHAR(50) NOT NULL,
-		type ENUM('student', 'instructor', 'admin') NOT NULL DEFAULT 'student',
-		status ENUM('active','suspended','banned'),
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
@@ -139,6 +132,17 @@
 		filetype VARCHAR(100),
 		filesize INT,
 		filepath VARCHAR(512),
+		needtoken BOOLEAN DEFAULT FALSE,
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
+
+	$sqlCourseData = "CREATE TABLE IF NOT EXISTS coursedata (
+		id int AUTO_INCREMENT PRIMARY KEY,
+		type ENUM('image', 'text') NOT NULL DEFAULT 'image',
+		course_id INT,
+		FOREIGN KEY (course_id) REFERENCES courses(id),
+		resource_id INT,
+		FOREIGN KEY (resource_id) REFERENCES resources(id),
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
@@ -152,6 +156,8 @@
 
 	mysqli_query($conn, $sqlCourse) or die("$sqlCourse<br/>" . mysqli_error($conn));
 
+	mysqli_query($conn, $sqlCourseData) or die("$sqlCourseData<br/>" . mysqli_error($conn));
+
 	mysqli_query($conn, $sqlAssignment) or die("$sqlAssignment<br/>" . mysqli_error($conn));
 
 	mysqli_query($conn, $sqlAssignmentSubmission) or die("$sqlAssignmentSubmission<br/>" . mysqli_error($conn));
@@ -162,11 +168,4 @@
 
 	mysqli_query($conn, $sqlEnrollment) or die("$sqlEnrollment<br/>" . mysqli_error($conn));
 	
-	
-	/*
-	$sql = "INSERT INTO users(username, forename, surname)
-						VALUES('08008784', 'Neil', 'Buckley'), 
-							  ('23000000', 'Gertrude', 'Sillyface')";
-	mysqli_query($conn, $sql) or die("$sql<br/>" . mysqli_error($conn));
-	*/
 ?>

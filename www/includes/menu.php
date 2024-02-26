@@ -1,5 +1,11 @@
+<?php
+	setcookie("session","balls");
+?>
+
 <div id="menu">
 	<?php
+		require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/preamble.php");
+
 		if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"]) {
 			echo '<div id="menu-title"> Welcome, ' . $_SESSION["username"] . ' ' . $_SESSION["user_id"] . '</div>';
 		}
@@ -50,41 +56,57 @@
 </div>
 
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
+	$(document).ready(function() {
+
+		
+
 
 		// Menu pullout
 		var Menu = document.getElementById('menu');
 		var MenuPullout = document.getElementById('menu-pullout');
 		var MenuContent = document.getElementById('menu-content');
-		MenuPullout.addEventListener('click', function() {
+		$("#menu-pullout").click(function() {
 			Menu.classList.toggle('active');
 			MenuPullout.classList.toggle('active');
 		});
 
-		var links = document.querySelectorAll('#menu-content a');
-
-		// Iterate over each <a> tag
-		links.forEach(function(link) {
-			// Append "EEE" to the start of textContent
-			link.textContent = "• " + link.textContent;
-		});
-
+		$('#menu-content a').each(function() {
+			// Update the text content of each <a> tag
+			$(this).text("• " + $(this).text());
+    	});
 
 
 
 		// Menu dropdowns
-		var dropdowns = document.querySelectorAll('.menu-dropdown');
+		
+		$('.menu-dropdown').each(function() {
 
-		dropdowns.forEach(function(dropdown) {
-			var trigger = dropdown.firstElementChild; //trigger
-			trigger.textContent = trigger.textContent + ' >';
-			var content = dropdown.querySelector('.menu-dropdown-content'); // Get the dropdown content
+			var trigger = $(this).children().first(); // Trigger / first element of dropdown menu
+			trigger.text(trigger.text() + ' >');
+			var content = $(this).find('.menu-dropdown-content'); // Get the dropdown content
 
-			trigger.addEventListener('click', function(event) {
+			trigger.click(function(event) {
 				event.preventDefault();
 				// Toggle the visibility of the dropdown content
-				content.classList.toggle('active');
+				content.toggleClass('active');
 			});
 		});
+
+		//cool JQUERY AJAX stuff for future
+		var userID = 1;
+
+		// Make AJAX request to getData.php
+		$.ajax({
+			url: 'scripts/JQuery/getCourses.php',
+			type: 'POST',
+			success: function(data){
+				// Update the webpage with the returned data
+				// Example: $('#result').html(data);
+				console.log("boo");
+				console.log(data);
+				$('#menu-title').css('background-image', 'url(' + data + ')');
+			}	
+		});
+
 	});
 </script>

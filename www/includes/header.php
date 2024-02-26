@@ -5,16 +5,16 @@
 			<p class="name unselectable">APERTURE</p>
 		</div>
 		<div class="buttons-container">
-			<a href="../index.php" class="button button-large">Home</a>
+			<a href="../index" class="button button-large">Home</a>
 			<?php
 				
 
 				if (isset($_SESSION["isLoggedIn"]) && $_SESSION["isLoggedIn"]) { //if logged in do this else that 
-					echo '<a href="../dashboard.php" class="button button-large">Dashboard</a>';
-					echo '<a href="../courses/courses.php" class="button button-large">Courses</a>';
+					echo '<a href="../dashboard" class="button button-large">Dashboard</a>';
+					echo '<a href="../courses/courses" class="button button-large">Courses</a>';
 				} else {
-					echo '<a class="button button-large" href="enrol.php">Enrol</a>';
-					echo '<a class="button button-large" href="login.php">Login</a>';
+					echo '<a class="button button-large" href="enrol">Enrol</a>';
+					echo '<a class="button button-large" href="login">Login</a>';
 				}
 			?>
 			
@@ -43,7 +43,8 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+<script>	
+			//cool JQUERY AJAX stuff for future
 			var userID = 1;
 
 			// Make AJAX request to getData.php

@@ -309,6 +309,11 @@ a {
 	overflow: hidden;
 }
 
+.card-container a {
+	font-family: 'BebasNeue', sans-serif;
+	color: black;
+}
+
 .card {
     position: relative;
 	display: flex;

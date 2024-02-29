@@ -36,8 +36,7 @@ if(isset($_GET['c'])) {
         return;
     }
     while ($row = mysqli_fetch_assoc($data)) {
-        echo "ID: " . $row['id'] . "<br>";
-        echo "Name: " . $row['title'] . "<br>";
+        $coursetitle = $row['title'];
         // Add other columns as needed
     }
 } else {
@@ -56,31 +55,20 @@ if(isset($_GET['c'])) {
         }
     }
     if (!$canAccess) {
-        echo "access denied lol";
-        return null;
+        echo "access denied";
+        return;
     }
-    
     echo "yo";
-    
-
-    echo '<div id="menu-title"> Welcome, ' . $_SESSION["username"] . ' ' . $_SESSION["user_id"] . '</div>';
-
-    //check if user can access course channel
-    //if so carry on
-
-
-    
-    //display assignments
-    //display lessons etc
-    //parse variables to menu (rework in menu soon)
-
-
 ?>
 
 
 
 
     <div id="page-contents">
+        <div id="page-header">
+        <?php echo '<h1 id="page-title">' . $coursetitle . '</h1>'?>
+        </div>
+
         <?php
         $data = getAssignments($course);
         foreach($data as $row) {

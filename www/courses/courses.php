@@ -47,7 +47,7 @@
 
 		$('.card').each(function() {
             const courseID = $(this).attr('id');
-            $(this).find('.card-title').text(courseID);
+            
 
 
 			var img = $('<img>', {
@@ -60,6 +60,7 @@
 
 			$(this).find('.card-contents').append(img);
 			$(this).append(settingsbar);
+			$(this).find('.courses-bar').text(courseID);
 			$(this).find('.courses-bar').append('<a href= settings.php?c=' + courseID + '>Settings</a>');
 
 		});

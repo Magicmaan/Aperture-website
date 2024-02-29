@@ -7,6 +7,7 @@ html, body {
     background-size: cover;
     margin: 0;
     padding: 0;
+	/*background-color: rgb(222, 249, 255);*/
 }
 
 a {
@@ -16,7 +17,7 @@ a {
 #coobdev {
 	width: 100%;
 	height: 100%;
-	background-color: blue;
+	background-color: rgb(255, 0, 225);
 }
 
 .header-container { /* header stuff */
@@ -38,7 +39,7 @@ a {
   gap: auto;
   width: 100%; 
   height: 100%;
-  background-color: black;
+  background-color: rgb(255, 179, 15);
 }
 .logo-container, .buttons-container {
 	display: flex;
@@ -47,12 +48,12 @@ a {
 	height: 100%;
 }
 .logo-container {
-	background-color: red;
+	background-color: rgb(255, 207, 73);
 	width: 400px;
 	
 }
 .buttons-container {
-	background-color: blue;
+	background-color: rgb(255, 207, 73);
 	width: 650px;
 	justify-content: flex-end; /* snap to right end */
 }
@@ -170,7 +171,7 @@ a {
 	display:flex;
 	flex-direction: column;
 	position: absolute;
-	background: blue;
+	background: rgb(255, 179, 15);
 	color: black;
 	transform: translateX(-200px);
 	transition: transform 0.3s ease-in; /* Apply transition effect */
@@ -183,7 +184,7 @@ a {
 
 
 #menu-pullout {
-	background: blue;
+	background: rgb(255, 179, 15);
 	color: white;
 	position:relative;
 	left: 85%;
@@ -215,7 +216,7 @@ a {
 	position: sticky;
 }
 #menu-content {
-	background-color: red;
+	background-color: rgb(255, 207, 73);
 	width: 95%;
 	padding-left: 5%;
 	position: relative;
@@ -273,14 +274,14 @@ a {
 	gap: 15px;
 	align-items: center;
 	overflow: hidden;
-	background-color: red;
+	background-color: rgb(255, 179, 15);
 	justify-content: center;
 	padding: 20px;
 }
 
 #page-header {
 	z-index: 1;
-	background-color: green;
+	background-color: rgb(255, 179, 15);
 	position: absolute;
 	width: 100%;
 	text-align: center;	
@@ -312,7 +313,7 @@ a {
     position: relative;
 	display: flex;
 	flex-direction: column;
-    background-color: blue;
+    background-color: rgb(251, 0, 255);
     width: 200px; /* Set minimum width to maintain consistency */
     height: 200px; /* Set minimum height to maintain consistency */
     border-radius: 15px;

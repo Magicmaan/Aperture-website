@@ -27,14 +27,21 @@ function getEnrollments() {
         return null;
     }
 
+    
+
+    $temp = array();
+    while ($row = mysqli_fetch_assoc($data)) {
+        $temp[] = $row;
+    }
+    $_SESSION["getEnrollments"] = $temp;
+
     //echo "Courses found: " . $numRows . "<br>";
     // Rewind the result set pointer
     mysqli_data_seek($data, 0);
 
     // Close the prepared statement for this iteration
     mysqli_stmt_close($stmt);
-    
-    $_SESSION["getEnrollments"] = $data;
+
     return $data;
 }
 
@@ -62,8 +69,19 @@ function getAssignments($course_id) {
         return null;
     }
 
+    $temp = array();
+    while ($row = mysqli_fetch_assoc($data)) {
+        $temp[] = $row;
+    }
+
+    //echo "Courses found: " . $numRows . "<br>";
+    // Rewind the result set pointer
     mysqli_data_seek($data, 0);
-    return $data;
+
+    // Close the prepared statement for this iteration
+    mysqli_stmt_close($stmt);
+
+    return $temp;
 }
 
 function getCourses() {
@@ -83,7 +101,8 @@ function getCourses() {
 
     $data = getEnrollments();
     // Loop through the query results and cache them in the session
-    while ($row = mysqli_fetch_assoc($data)) {
+    
+    foreach ($data as $row) {
         $course_id = $row['id']; // Assuming 'id' is the primary key of the 'courses' table
     
         $sqlnew = "SELECT * FROM courses WHERE id = ?";

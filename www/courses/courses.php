@@ -25,13 +25,15 @@
             getCourses();
             // Output the data
             foreach ($_SESSION['getCourses'] as $course_id => $courseData) {
-                echo '<div class="card" id="' . $courseData["id"] . '"> 
-                    <a href= http://localhost/courses/view.php?c=' . $courseData["id"] . '></a>
-                    <h2 class="card-title">' . $courseData['title'] . '</h2>
-                        <div class="card-contents card-subsection">
-                        </div>
-                        <div class="card-divider"></div>
-                    </div>
+                echo '<a href= view.php?c=' . $courseData["id"] . '>
+						<div class="card" id="' . $courseData["id"] . '"> 
+						
+						<h2 class="card-title">' . $courseData['title'] . '</h2>
+							<div class="card-contents card-subsection">
+							</div>
+							<div class="card-divider"></div>
+						</div>
+					</a>
                 ';
                 // Output other course details as needed
             }
@@ -42,9 +44,23 @@
 <script>
 	$(document).ready(function() {
 
+
 		$('.card').each(function() {
-            var courseID = $(this).attr('id');
-            $(this).find('.card-title').text(courseID + ' JQ');
+            const courseID = $(this).attr('id');
+            $(this).find('.card-title').text(courseID);
+
+
+			var img = $('<img>', {
+				src: '/resources/courses/' + courseID + '/splash.png', 
+				alt: 'Image for card: ' + courseID
+			});
+			var settingsbar = $('<div class="courses-bar">	</div>');
+
+
+
+			$(this).find('.card-contents').append(img);
+			$(this).append(settingsbar);
+			$(this).find('.courses-bar').append('<a href= settings.php?c=' + courseID + '>Settings</a>');
 
 		});
 

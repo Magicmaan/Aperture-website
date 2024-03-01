@@ -28,6 +28,7 @@
         if ($row["filetype"] == "image") {
             echo($row["filepath"]);
         }
-        echo null;
+        
     }
+    echo "/resources/default-pfp.png";
 ?>

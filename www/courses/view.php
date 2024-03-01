@@ -1,5 +1,5 @@
 <?php
-    $pageTitle = "Simple VLE Homepage"; 
+    $pageTitle = "Course Page"; 
     require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/preamble.php");
     require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
     require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/menu.php");
@@ -77,25 +77,32 @@ if(isset($_GET['c'])) {
                     echo $row["description"];
                 }
 
-                echo '<a href=http://localhost/assignment/newAssignment?c=' . $course . '>"Click Here to make new Assignment"</a>'
             ?>
         </div>
 
 
         <div class="card-container-courses">
             <?php
-            
+            echo '<a href= ../Assignment/newAssignment.php?c=>
+						<div class="courses-card" id="0	"> 
+						
+						<h2 class="card-title">New Assignment</h2>
+                        </div>
+					</a>
+                ';
+
+
         
             
             foreach ($data as $row) {
                 echo '
-                        <div class="courses-card" id="' . $row["id"] . '"> 
+
+
+                    <div class="courses-card" id="' . $row["id"] . '"> 
 
                         <div class="card-contents">
                             <h2 class="card-title">' . $row['title'] . '</h2>
-                            <div class="card-subsection">
-
-                            </div>
+                            
                         </div>
 
                         
@@ -107,10 +114,10 @@ if(isset($_GET['c'])) {
                         <div class="card-contents card-info">
                             <p id="posted">Posted: </p>
                             <p id="due">Due: </p>
-                            <p id="from">From: </p>
+                            <p id="from">From ID: </p>
                             <p id="files">Files: </p>
                         </div>
-                       </div>
+                    </div>
                     
                 ';
             }
@@ -135,7 +142,24 @@ if(isset($_GET['c'])) {
             var settingsbar = $('<div class="courses-bar">	</div>');
 
 
-            $.getJSON('/resources/assignments/' + assignmentID + '/info.json', function(data) {
+            $.getJSON('/resources/assignments/' + assignmentID + '/data.json', function(data) {
+                var date = new Date(data.start_date);
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var formattedDate = day + "/" + month;
+                $("#posted").append(formattedDate);
+
+                var date = new Date(data.end_date);
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var formattedDate = day + "/" + month;
+                $("#due").append(formattedDate);
+
+                $("#from").append(data.instructor_id);
+
+                $("#files").append("0");
+
+
                 $.each(data, function(index, item) {
                     console.log(index); // Access each item
                     console.log(item);

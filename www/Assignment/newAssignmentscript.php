@@ -24,7 +24,7 @@
     // Check if execution was successful
     if ($success) {
         // Token inserted successfully
-        echo "Token generated and inserted successfully.";
+        echo "Assignment created and inserted successfully.";
     } else {
         // Handle insertion error
         echo "Error: " . mysqli_error($conn);

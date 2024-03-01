@@ -21,6 +21,10 @@
             getEnrollments();
             getCourses();
 
+			if (isset($_SESSION["getCourses"])) {
+				
+			
+
             // Output the data
             foreach ($_SESSION['getCourses'] as $course_id => $courseData) {
                 echo '<a href= view.php?c=' . $courseData["id"] . '>
@@ -35,6 +39,19 @@
                 ';
                 // Output other course details as needed
             }
+
+			echo '<a href= newCourse.php>
+						<div class="card" id="0	"> 
+						
+						<h2 class="card-title">New Course</h2>
+							<div class="card-contents card-subsection">
+							</div>
+							<div class="card-divider"></div>
+						</div>
+					</a>
+                ';
+
+			}
         ?>
     </div>
 </div>
@@ -46,8 +63,6 @@
 		$('.card').each(function() {
             const courseID = $(this).attr('id');
             
-
-
 			var img = $('<img>', {
 				src: '/resources/courses/' + courseID + '/splash.png', 
 				alt: 'Image for card: ' + courseID

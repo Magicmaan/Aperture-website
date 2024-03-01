@@ -23,7 +23,6 @@ function getEnrollments() {
 
     $numRows = mysqli_num_rows($data);
     if ($numRows == 0) {
-        echo "No courses";
         return null;
     }
 
@@ -48,7 +47,6 @@ function getEnrollments() {
 
 function getAssignments($course_id) {
     if (!isset($course_id)) {
-        echo "not set";
         return null;
     }
 
@@ -66,7 +64,6 @@ function getAssignments($course_id) {
 
     $numRows = mysqli_num_rows($data);
     if ($numRows == 0) {
-        echo "No courses";
         return null;
     }
     // Get the current PHP time as a Unix timestamp
@@ -74,11 +71,11 @@ function getAssignments($course_id) {
     $temp = array();
     while ($row = mysqli_fetch_assoc($data)) {
         // Convert MySQL DATETIME to Unix timestamp
-        $start_time_unix = strtotime($row["start_time"]);
+
         // Compare the timestamps
-        if ($start_time_unix < $current_time) {
+        
             $temp[] = $row;
-        }
+
     }
 
     //echo "Courses found: " . $numRows . "<br>";
@@ -92,7 +89,7 @@ function getAssignments($course_id) {
 }
 
 function getCourses() {
-    // Initialize the session cache array if not already set
+    // Initialize the session cache array if    t already set
     if (!isset($_SESSION['getCourses'])) {
         $_SESSION['getCourses'] = [];
     }
@@ -108,7 +105,7 @@ function getCourses() {
 
     $data = getEnrollments();
     // Loop through the query results and cache them in the session
-    
+    if (isset($data)) {
     foreach ($data as $row) {
         $course_id = $row['id']; // Assuming 'id' is the primary key of the 'courses' table
     
@@ -141,6 +138,7 @@ function getCourses() {
 
     // Return the cached course data
     return $_SESSION['getCourses'];
+    }
 }
 
 function genCourseInvite($courseID, $expiretime = 2) {
@@ -258,73 +256,7 @@ function removeUser($courseID, $userIDtoRemove) {
     }
 }
 
-function newAssignment() {
-    if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
-        return;
-    }
 
-
-    $title = $_POST["title"];
-    $description = $_POST["description"];
-    $start_date = $_POST["start_date"];
-    $end_date = $_POST["end_date"];
-    $course_id = $_POST["course_id"];
-    $instructor_id = $_SESSION["user_id"];
-
-    
-    
-    $sqlInsertToken = "INSERT INTO assignments (title,description,start_date,end_date,instructor_id,course_id) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $sqlInsertToken);
-    // Bind parameters and execute the statement
-    mysqli_stmt_bind_param($stmt, "ssssii", $title, $description, $start_date, $end_date, $instructor_id, $course_id);
-    $success = mysqli_stmt_execute($stmt);
-
-    // Check if execution was successful
-    if ($success) {
-        // Token inserted successfully
-        echo "Token generated and inserted successfully.";
-    } else {
-        // Handle insertion error
-        echo "Error: " . mysqli_error($conn);
-        return;
-    }
-    $id = mysqli_insert_id($conn);
-
-
-
-
-    $jsonarray = array(
-        "id" => $id,
-        "title" => $title,
-        "description" => $description,
-        "start_date" => $start_date,
-        "end_date" => $end_date,
-        "instructor_id" => $instructor_id,
-        "course_id" => $course_id,
-        "files" => $files,
-    );
-
-
-    $jsonString = json_encode($data);
-    // Specify the file path
-    $filePath = "/resources/assignments/" . $id . "/data.json";
-
-
-    if (!file_exists($filePath)) {
-        mkdir($dirPath, 0777, true); // Create directory recursively
-        echo "Directory created successfully";
-    } else {
-        echo "Directory already exists";
-    }
-    // Write the JSON string to the file
-    file_put_contents($filePath, $jsonString);
-
-    echo "http://localhost/assignments/enrol?c=" . $courseID ."&t=" . $token;
-    
-    return true;
-
-
-}
 
 
 ?>

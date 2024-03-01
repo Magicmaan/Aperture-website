@@ -12,9 +12,9 @@
 		<img src='../arrow.jpg'>
 	</div>
 	<div id="menu-content">
-		<a href="index.php">Homepage blah blah blah blah</a>
-		<a href="enrol.php">Enrol</a>
-		<a href="login.php">Login</a>
+		<a href="/index.php">Homepage blah blah blah blah</a>
+		<a href="/enrol.php">Enrol</a>
+		<a href="/login.php">Login</a>
 		<div class="menu-dropdown">
 			<a href="#">Dropdown 1  blah blah blah blah </a>
 			<div class="menu-dropdown-content">
@@ -24,7 +24,7 @@
             </div>
 		</div>
 		
-		<a href="logout.php">Logout</a>
+		<a href="/logout.php">Logout</a>
 
 		<div class="menu-dropdown">
 			<a href="#">dropdown lvl 1</a>
@@ -39,17 +39,6 @@
 				</div>
             </div>
 		</div>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>
-		<a href="logout.php">Logout</a>	
 	</div>
 </div>
 

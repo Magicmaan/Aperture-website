@@ -23,7 +23,7 @@
 			
 			<div id = "pfp" class="button button-widget Profile-picture">
 				<?php
-					
+					echo "<div id=" . $_SESSION["user_id"] . "> </div>";
 					//$profilepictureURL = getPFP();
 					
 					//echo ("<img src=" . $profilepictureURL . ">");
@@ -39,9 +39,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>	
-			//cool JQUERY AJAX stuff for future
-			var userID = 1;
-
+			
+			var userID = $("#pfp").find("div").attr("id");
 			// Make AJAX request to getData.php
 			$.ajax({
 				url: '/scripts/JQuery/getimage.php?img=' + userID,

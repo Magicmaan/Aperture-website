@@ -2,7 +2,7 @@
 	$pageTitle = "Simple VLE Homepage"; 
 	require_once("includes/preamble.php");
 	require_once("includes/header.php");
-	require_once("includes/menu.php");
+
 ?>
 
 <div id="contents">

@@ -40,8 +40,6 @@ if(isset($_GET['id'])) {
     }
 
     getResource($resource_id);
-
-
 } else {
     // If ID parameter is not present in the URL, handle it accordingly
     echo "No ID parameter found in the URL.";

@@ -13,7 +13,7 @@
 //view.php will view course contents
 // Check if the ID parameter is present in the URL
 
-genCourseInvite(1);
+//genCourseInvite(1);
 
 if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
     echo ("<br> <br> Please login");
@@ -76,30 +76,79 @@ if(isset($_GET['c'])) {
                 foreach ($data as $row) {
                     echo $row["description"];
                 }
+
+                echo '<a href=http://localhost/assignment/newAssignment?c=' . $course . '>"Click Here to make new Assignment"</a>'
             ?>
         </div>
 
 
-        <div class="card-container">
-        <?php
+        <div class="card-container-courses">
+            <?php
+            
         
-    
-        
-        foreach ($data as $row) {
-            echo '<a href= http://localhost/assignment/view.php?c=' . $row["id"] . '>
-                    <div class="card" id="' . $row["id"] . '"> 
-                    
-                    <h2 class="card-title">' . $row['title'] . '</h2>
-                        <div class="card-contents card-subsection">
+            
+            foreach ($data as $row) {
+                echo '
+                        <div class="courses-card" id="' . $row["id"] . '"> 
+
+                        <div class="card-contents">
+                            <h2 class="card-title">' . $row['title'] . '</h2>
+                            <div class="card-subsection">
+
+                            </div>
                         </div>
-                        <div class="card-divider"></div>
-                    </div>
-                </a>
-            ';
-        }
-        ?>
+
+                        
+
+                        <div class="card-contents card-body">
+                            ' . $row["description"] . '
+                        </div>
+
+                        <div class="card-contents card-info">
+                            <p id="posted">Posted: </p>
+                            <p id="due">Due: </p>
+                            <p id="from">From: </p>
+                            <p id="files">Files: </p>
+                        </div>
+                       </div>
+                    
+                ';
+            }
+            ?>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+
+
+        $('.courses-card').each(function() {
+            const assignmentID = $(this).attr('id');
+            
+
+
+            var img = $('<img>', {
+                src: '/resources/assignments/' + assignmentID + '/splash.png', 
+                alt: 'Image for card: ' + assignmentID
+            });
+            var settingsbar = $('<div class="courses-bar">	</div>');
+
+
+            $.getJSON('/resources/assignments/' + assignmentID + '/info.json', function(data) {
+                $.each(data, function(index, item) {
+                    console.log(index); // Access each item
+                    console.log(item);
+                    // Do something with each item
+                });
+            });
+
+        });
+
+
+
+        });
+    </script>
 
     <?php
         require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/footer.php");

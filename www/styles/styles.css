@@ -313,6 +313,28 @@ a {
 	overflow: hidden;
 }
 
+.card-container-courses {
+	padding: 50px;
+    width: 90%;
+    height: auto;
+	justify-content: center;
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+	flex-grow: 1;
+    gap: 10px; /* Gap between grid items */
+	overflow: hidden;
+}
+
+.card-container-courses a {
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 1;
+	
+	width: auto;
+	height: auto;
+}
+
 .card-container a {
 	font-family: 'BebasNeue', sans-serif;
 	color: black;
@@ -329,7 +351,19 @@ a {
     border-radius: 15px;
     padding: 10px;
 	gap: 5px;
+}
 
+.courses-card {
+	background-color: black;
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	width: 90%;
+	height: auto;
+	min-height: 200px;
+	padding: 10px;
+	border-radius: 15px;
 }
 
 .card-title {
@@ -371,6 +405,31 @@ a {
 	height: min-content;
 	overflow: hidden;
 	padding-bottom: 5px;
+	padding: 30px;
+}
+
+.card-body .card-info {
+	display: flex;
+	flex-direction: column;
+	min-width: 100px;
+	width: auto;
+	height: 100%;
+	margin: 5px;
+	padding: 5px;
+	background-color: red;
+}
+.card-info {
+	min-width: 100px;
+}
+.card-body {
+	position: relative;
+	display: flex;
+	flex-grow: 1;
+	overflow: hidden;
+	justify-content: center;
+	background-color: beige;
+	min-width: 400px;
+	height: max-content;
 }
 
 .card-contents img {
@@ -395,16 +454,16 @@ a {
 	height: auto;
 }
 
-.course-description {
+#course-description {
 	display: flex;
-	width: 75%;
+	width: 80%;
 	height: auto;
 	padding: 10px;
 	margin: 5px;
-	border-radius: 50px;
+	border-radius: 20px;
 	background-color: blue;
 	font-family: 'BebasNeue', sans-serif;
-	font-size: 24px;
+	font-size: 18px;
 }
 
 #footer {

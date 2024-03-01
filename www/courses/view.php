@@ -69,7 +69,7 @@ if(isset($_GET['c'])) {
         <div id="page-header">
         <?php echo '<h1 id="page-title">' . $coursetitle . '</h1>'?>
         </div>
-
+        <?php echo "<div id=" . $course ."></div>";?>
         <div id="course-description">
             <?php
                 $data = getAssignments($course);
@@ -83,7 +83,7 @@ if(isset($_GET['c'])) {
 
         <div class="card-container-courses">
             <?php
-            echo '<a href= ../Assignment/newAssignment.php?c=>
+            echo '<a href= ../Assignment/newAssignment.php?c=' . $course . '>
 						<div class="courses-card" id="0	"> 
 						
 						<h2 class="card-title">New Assignment</h2>

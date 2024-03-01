@@ -31,7 +31,8 @@ function getEnrollments() {
 
     $temp = array();
     while ($row = mysqli_fetch_assoc($data)) {
-        $temp[] = $row;
+        if ($row['active'] == '1') { $temp[] = $row; };
+        
     }
     $_SESSION["getEnrollments"] = $temp;
 
@@ -136,7 +137,119 @@ function getCourses() {
     return $_SESSION['getCourses'];
 }
 
+function genCourseInvite($courseID, $expiretime = 2) {
+    if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
+        return;
+    }
+
+    $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+    $user_id = $_SESSION["user_id"];    
+    $sql = "SELECT * FROM courses WHERE id = ? AND instructor_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $courseID, $user_id);
+    mysqli_stmt_execute($stmt);
+    $data = mysqli_stmt_get_result($stmt);
+
+    if (!$data) {
+        echo "Error executing query: " . mysqli_error($conn);
+        return;
+    }
+    $numRows = mysqli_num_rows($data);
+    if ($numRows == 0) {
+        echo "User is not instructor of course";
+
+        $sql = "SELECT * FROM enrollments WHERE course_id = ? AND user_id = ? AND admin_access = '1' ";
+        $stmtenrollments = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmtenrollments, "ii", $courseID, $user_id);
+        mysqli_stmt_execute($stmtenrollments);
+        $dataenrollments = mysqli_stmt_get_result($stmtenrollments);
+
+        if (!$dataenrollments) {
+            echo "Error executing query: " . mysqli_error($conn);
+            return null;
+        }
+
+        $numRowsenrollments = mysqli_num_rows($dataenrollments);
+        if ($numRowsenrollments == 0) {
+            echo "User is not admin of course";
+            return null;
+        }
+    }
+    
+    $token = bin2hex(random_bytes(32)); // Generates a 64-character token
 
 
+    // Establish a connection to the database
+    $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+    $sqlInsertToken = "INSERT INTO tokens (token, type, course_id, exp_time) VALUES (?, 'course', ?, ?)";
+    $stmt = mysqli_prepare($conn, $sqlInsertToken);
+    // Bind parameters and execute the statement
+    mysqli_stmt_bind_param($stmt, "sii", $token, $courseID, $expiretime); // "si" indicates a string followed by an integer
+    $success = mysqli_stmt_execute($stmt);
+
+    // Check if execution was successful
+    if ($success) {
+        // Token inserted successfully
+        echo "Token generated and inserted successfully.";
+    } else {
+        // Handle insertion error
+        echo "Error: " . mysqli_error($conn);
+    }
+
+    echo "http://localhost/courses/enrol?c=" . $courseID ."&t=" . $token;
+
+}
+
+function removeUser($courseID, $userIDtoRemove) {
+    if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
+        return;
+    }
+    $user_id = $_SESSION["user_id"];   
+
+    $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
+     
+    $sql = "SELECT * FROM courses WHERE id = ? AND instructor_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $courseID, $user_id);
+    mysqli_stmt_execute($stmt);
+    $data = mysqli_stmt_get_result($stmt);
+
+    if (!$data) {
+        echo "Error executing query: " . mysqli_error($conn);
+        return;
+    }
+    $numRows = mysqli_num_rows($data);
+    if ($numRows == 0) {
+        echo "User is not instructor of course";
+
+        $sql = "SELECT * FROM enrollments WHERE course_id = ? AND user_id = ? AND admin_access = '1' ";
+        $stmtenrollments = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmtenrollments, "ii", $courseID, $user_id);
+        mysqli_stmt_execute($stmtenrollments);
+        $dataenrollments = mysqli_stmt_get_result($stmtenrollments);
+
+        if (!$dataenrollments) {
+            echo "Error executing query: " . mysqli_error($conn);
+            return null;
+        }
+
+        $numRowsenrollments = mysqli_num_rows($dataenrollments);
+        if ($numRowsenrollments == 0) {
+            echo "User is not admin of course";
+            return null;
+        }
+    }
+
+    $sqlUpdateEnrollment = "UPDATE enrollments SET active = 0 WHERE user_id = ? AND course_id = ?";
+    $stmtDeleteEnrollment = mysqli_prepare($conn, $sqlDeleteEnrollment);
+    mysqli_stmt_bind_param($stmtDeleteEnrollment, "ii", $userIDtoRemove, $courseID);
+    $success = mysqli_stmt_execute($stmtDeleteEnrollment);
+    
+    if ($success) {
+        echo "Enrollment record removed successfully.";
+    } else {
+        echo "Error inserting enrollment record: " . mysqli_error($conn);
+    }
+}
 
 ?>

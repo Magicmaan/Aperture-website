@@ -17,13 +17,8 @@
 					echo '<a class="button button-large" href="login">Login</a>';
 				}
 			?>
-			
-			
-			<?php
-				
-			?>
 
-			</div>
+			
 			
 			
 			<div id = "pfp" class="button button-widget Profile-picture">
@@ -49,7 +44,7 @@
 
 			// Make AJAX request to getData.php
 			$.ajax({
-				url: 'scripts/JQuery/getimage.php?img=' + userID,
+				url: '/scripts/JQuery/getimage.php?img=' + userID,
 				type: 'POST',
 				success: function(data){
 					// Update the webpage with the returned data
@@ -62,4 +57,3 @@
 
 	
 </script>
-;

@@ -73,6 +73,14 @@ function login() {
 	}
 	
 	$row = mysqli_fetch_assoc($data);
+	switch ($row['status']) {
+		case "inactive":
+			$loginResult = "<p style='color: red'>Please verify Email.</p>";
+			return $loginResult;
+		case "banned":
+			$loginResult = "<p style='color: red'>You are banned.</p>";
+			return $loginResult;
+	}
 	// Extract the 'id' field and assign it to $user_id
 	$user_id = $row['id'];
 	$username = $row['username'];

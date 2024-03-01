@@ -1,6 +1,4 @@
-<?php
-	setcookie("session","balls");
-?>
+
 
 <div id="menu">
 	<?php
@@ -97,13 +95,9 @@
 
 		// Make AJAX request to getData.php
 		$.ajax({
-			url: 'scripts/JQuery/getCourses.php',
+			url: '/scripts/JQuery/getCourses.php',
 			type: 'POST',
 			success: function(data){
-				// Update the webpage with the returned data
-				// Example: $('#result').html(data);
-				console.log("boo");
-				console.log(data);
 				$('#menu-title').css('background-image', 'url(' + data + ')');
 			}	
 		});

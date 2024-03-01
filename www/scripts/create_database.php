@@ -22,14 +22,19 @@
 			forename VARCHAR(30) NOT NULL,
 			surname VARCHAR(50) NOT NULL,
 			type ENUM('student', 'instructor', 'admin') NOT NULL DEFAULT 'student',
-			status ENUM('active','suspended','banned'),
+			status ENUM('active','suspended','banned','inactive'),
 			reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
 	$sqlToken = "CREATE TABLE IF NOT EXISTS tokens (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		token VARCHAR(64),
-		user_id INT NOT NULL,
+		type ENUM('enrol','course'),
+		user_id INT,
+		FOREIGN KEY (user_id) REFERENCES users(id),
+		course_id INT,
+		FOREIGN KEY (course_id) REFERENCES courses(id),
+		exp_time INT NOT NULL DEFAULT '2',
 		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
@@ -119,7 +124,9 @@
 			post_access BOOLEAN DEFAULT 0,
 			admin_access BOOLEAN DEFAULT 1,
 			reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-			user_id INT,
+			active BOOLEAN DEFAULT 1,
+			user_id INT NOT NULL,
+			
 			FOREIGN KEY (user_id) REFERENCES users(id),
 
 			course_id INT NOT NULL,

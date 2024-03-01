@@ -13,14 +13,16 @@
 //view.php will view course contents
 // Check if the ID parameter is present in the URL
 
+genCourseInvite(1);
+
 if (!isset($_SESSION["isLoggedIn"]) && !$_SESSION["isLoggedIn"]) {
+    echo ("<br> <br> Please login");
     return;
 }
 if(isset($_GET['c'])) {
     // Retrieve the ID from the URL
     $course = $_GET['c'];
     // Use the ID in your script
-    echo "The ID passed in the URL is: " . $course . "<br>";
     $conn = mysqli_connect("localhost", "root", "root", "aperturebase");
     $sql = "SELECT * FROM courses
             WHERE id='$course'
@@ -32,7 +34,6 @@ if(isset($_GET['c'])) {
     }
     $numRows = mysqli_num_rows($data);
     if ($numRows == 0) {
-        echo "Course not found";
         return;
     }
     while ($row = mysqli_fetch_assoc($data)) {
@@ -48,7 +49,6 @@ if(isset($_GET['c'])) {
     $Coursedata = getCourses();
     $canAccess = false;
     foreach ($Coursedata as $row) {
-        echo $row['id'];
         if ($row['id'] == $course) {
             $canAccess = true;
             break;
@@ -58,10 +58,11 @@ if(isset($_GET['c'])) {
         echo "access denied";
         return;
     }
-    echo "yo";
+    //$expiretime = "5";
+    //genCourseInvite($course, $expiretime);
 ?>
 
-
+    
 
 
     <div id="page-contents">
@@ -69,12 +70,35 @@ if(isset($_GET['c'])) {
         <?php echo '<h1 id="page-title">' . $coursetitle . '</h1>'?>
         </div>
 
+        <div id="course-description">
+            <?php
+                $data = getAssignments($course);
+                foreach ($data as $row) {
+                    echo $row["description"];
+                }
+            ?>
+        </div>
+
+
+        <div class="card-container">
         <?php
-        $data = getAssignments($course);
-        foreach($data as $row) {
-            echo $row['id'] . " " . $row['title'];
+        
+    
+        
+        foreach ($data as $row) {
+            echo '<a href= http://localhost/assignment/view.php?c=' . $row["id"] . '>
+                    <div class="card" id="' . $row["id"] . '"> 
+                    
+                    <h2 class="card-title">' . $row['title'] . '</h2>
+                        <div class="card-contents card-subsection">
+                        </div>
+                        <div class="card-divider"></div>
+                    </div>
+                </a>
+            ';
         }
         ?>
+        </div>
     </div>
 
     <?php

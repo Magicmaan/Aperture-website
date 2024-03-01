@@ -1,8 +1,5 @@
 <?php
     //courses.php will display all courses of user
-    
-
-
 	$pageTitle = "Simple VLE Homepage"; 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/preamble.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/includes/header.php");
@@ -23,6 +20,7 @@
         <?php
             getEnrollments();
             getCourses();
+
             // Output the data
             foreach ($_SESSION['getCourses'] as $course_id => $courseData) {
                 echo '<a href= view.php?c=' . $courseData["id"] . '>
@@ -65,42 +63,7 @@
 
 		});
 
-
-		// Menu pullout
-		var Menu = document.getElementById('menu');
-		var MenuPullout = document.getElementById('menu-pullout');
-		var MenuContent = document.getElementById('menu-content');
-		$("#menu-pullout").click(function() {
-			Menu.classList.toggle('active');
-			MenuPullout.classList.toggle('active');
-		});
-
-		$('#menu-content a').each(function() {
-			// Update the text content of each <a> tag
-			$(this).text("• " + $(this).text());
-    	});
-
-
-
-		// Menu dropdowns
 		
-		
-
-		//cool JQUERY AJAX stuff for future
-		var userID = 1;
-
-		// Make AJAX request to getData.php
-		$.ajax({
-			url: 'scripts/JQuery/getCourses.php',
-			type: 'POST',
-			success: function(data){
-				// Update the webpage with the returned data
-				// Example: $('#result').html(data);
-				console.log("boo");
-				console.log(data);
-				$('#menu-title').css('background-image', 'url(' + data + ')');
-			}	
-		});
 
 	});
 </script>

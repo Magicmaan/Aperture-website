@@ -1,13 +1,15 @@
 <?php
-	require_once("includes/preamble.php");
+	
 
+	
+
+	$pageTitle = "Enrol"; 
+	require_once("includes/preamble.php");
+	
 	$enrolResult = "";
 	if (isset($_POST["username"])) $enrolResult = enrol();
 
-	$pageTitle = "Enrol: Simple VLE"; 
-	
 	require_once("includes/header.php");
-	require_once("includes/menu.php");
 ?>
 <div id="contents">
 	<?php

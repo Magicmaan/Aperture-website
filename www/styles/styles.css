@@ -1,56 +1,512 @@
-#header {
-	left: 0%;
-	top: 0%;
-	position: absolute;
-	text-align: center;
+@font-face {
+	font-family: 'BebasNeue'; /* Define your font family name */
+	src: url('../includes/BebasNeue-Regular.ttf') format('truetype'); /* Path to your .ttf font file */
+  }
+
+html, body {
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+#coobdev {
 	width: 100%;
-	height: 10%;
+	height: 100%;
 	background-color: blue;
 }
 
-#bar-container ul {
-	font-style: none;
+.header-container { /* header stuff */
+  z-index: 0;
+  width: 100%;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;  
+  position: relative;
+  overflow: hidden;
+} 
+.header {
+  display: flex; /* Use flexbox to create a horizontal layout */
+  flex-direction: row;
+  justify-content: space-between; /* Center the items horizontally */
+  align-items: center;
+  gap: auto;
+  width: 100%; 
+  height: 100%;
+  background-color: black;
 }
+.logo-container, .buttons-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 100%;
+}
+.logo-container {
+	background-color: red;
+	width: 400px;
+	
+}
+.buttons-container {
+	background-color: blue;
+	display: flex;
+	flex-grow: 1;
+	width: auto;
+	justify-content: flex-end; /* snap to right end */
+}
+.button {
+	background-color: white;
+	flex-grow: 0;
+	height: auto;
+	padding: 10px 8%;
+	margin: 10px 2%;
+	text-align: center;
+	justify-content: center;
+	border-radius: 50px;
+	max-width: 75px;
+}
+
+.button-large {
+	width: auto;
+}
+
+.button-widget {
+	min-width: 20px;
+	padding: 10px;
+	margin: 10px 8px;
+}
+.button-widget:first-child {
+	margin-left: 20px;
+}
+.button-widget:last-child {
+	margin-right: 20px;
+}
+
+.Profile-picture {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+	text-align: center;
+
+	background-size: cover;
+}
+
+
+
+.Settings {
+	background-size: cover;
+	background-position: center;
+	width: 40px;
+	height: 40px;
+}
+
+@media screen and (max-width: 1000px) {
+	.name {
+		display: none;
+	}
+	.logo-container {
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 690px) {
+	.header {
+		justify-content: center;
+		gap: none;
+		width: 100%;
+	}
+	.buttons-container {
+		width: 100%;
+		justify-content: center;
+	}
+	.button-widget {
+		display: none;
+	}
+    .logo-container {
+		width: 0px;
+    	display: none;
+    }
+	.button {
+		margin: 10px 5%;
+	}
+}
+
+.icon {
+	margin: 5px;
+    position: relative;
+	height: 100%;
+	width: auto;
+}
+
+.name {
+	margin: 10px;
+	margin-left: 0px;
+    position: relative;
+	height: auto;
+	width: auto;
+	font-family: 'BebasNeue', sans-serif;
+	font-size: 40px;
+}
+
+
+
+/* Define scrollbar track */
+#menu-content::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+
+
+
+.unselectable {
+	user-select: none;
+}
+
 
 #menu {
-	width: 85%;
-	padding: 10px;
-	margin: 10px;
-	background: black;
-	border: 2px solid red;
-	padding-left: 50px;
+	width: 200px;
+	height: 90vh;
+	display:flex;
+	flex-direction: column;
+	position: absolute;
+	background: blue;
+	color: black;
+	transform: translateX(-200px);
+	transition: transform 0.3s ease-in; /* Apply transition effect */
+	z-index: 2;
 }
 
-#menu a {
-	font-size: 25px;
-	font-weight: bold;
-	color: white;
-	text-decoration: none;
-	margin-right: 30px;
+#menu.active {
+	transform: translateX(0px);
 }
+
+
+#menu-pullout {
+	background: blue;
+	color: white;
+	position:relative;
+	left: 85%;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: transform 0.2s ease-in; /* Apply transition effect */
+	transform: rotate(0deg);
+
+	justify-content: center;
+	text-align: center;
+}
+#menu-pullout.active {
+	transform: rotate(180deg);
+}
+#menu-pullout img {
+	width: 100%;
+	height: 100%;
+}
+
+#menu-title {
+	width: 95%;
+	height: max-content;
+	padding: 5%;
+	padding-right: 0%;
+	padding-top: 20%;
+	position: sticky;
+}
+#menu-content {
+	background-color: red;
+	width: 95%;
+	padding-left: 5%;
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow:scroll;
+	overflow-x: hidden;
+}
+#menu-content a {
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	margin-right: 20px;
+	width: 100%;
+	position: relative;
+	display: block;
+	white-space: wrap;
+	margin-top: 5px;
+}
+
+
+
+.menu-dropdown-content {
+	padding-left: 7%;
+	display: flex;
+	flex-direction: column;
+	height: 0px;
+	opacity: 0;
+	transform: translateX(-10px);
+	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.menu-dropdown-content.active {
+	opacity: 1;
+	height: auto;
+	transform: translateX(0px);
+}
+
+
 
 #menu a:hover {
-	color: black;
 	background-color: white;
 	text-decoration: underline;
 
 }
 
-#contents {
-	width: 85%;
-	background-color: #eeeeee;
-	border: 2px solid black;
-	margin: 20px;
-	padding: 20px;
+#page-contents {
+	width: 100%;
+	height: auto;
+	position:relative;
+	display: flex; /* Establish flex container */
+	flex-direction: column;
+	justify-content: center;
+	gap: 15px;
+	align-items: center;
+	overflow: hidden;
+	background-color: rgb(184, 184, 184);
+	justify-content: center;
+	padding: 0;	
+	
+}
+
+#page-header {
+	z-index: 1;
+	background-color: rgb(199, 199, 199);
+	position: relative;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	text-align: center;	
+	justify-content: center;
+	
+	border-bottom: 2px black solid;
+}
+#page-title {
+	width: auto;
+}
+
+.card-container {
+	padding: 50px;
+    width: 90%;
+    height: auto;
+	justify-content: center;
+	align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Auto-fill columns with a minimum width of 200px */
+	flex-grow: 1;
+    grid-gap: 10px; /* Gap between grid items */
+	overflow: hidden;
+}
+
+.card-container-courses {
+	padding: 50px;
+    width: 90%;
+    height: auto;
+	justify-content: center;
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+	flex-grow: 1;
+    gap: 10px; /* Gap between grid items */
+	overflow: hidden;
+}
+
+.card-container-courses a {
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 1;
+	
+	width: auto;
+	height: auto;
+}
+
+.card-container a {
+	font-family: 'BebasNeue', sans-serif;
+	color: black;
+}
+
+.card {
+    position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+    background-color: #dadada;
+    width: 400px; /* Set minimum width to maintain consistency */
+    height: 400px; /* Set minimum height to maintain consistency */
+    border-radius: 15px;
+    padding: 10px;
+	gap: 5px;
+}
+
+.courses-card {
+	background-color: rgb(233 233 233);
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	width: 90%;
+	height: auto;
+	min-height: 200px;
+	padding: 10px;
+	border-radius: 15px;
+}
+
+.card-title {
+	font-family: 'BebasNeue', sans-serif;
+	text-align: left;
+	height: max-content;
+	padding: 0;
+	margin: 0;
+}
+
+
+
+
+.card-subsection {
+	width: 100%;
+	min-height: 100px;	
+	height: auto;
+	position: relative;
+	background-color: #acacac;
+}
+
+
+.card-divider-vport {
+	position: relative;
+	width: 85vw;
+	height: 2px;
+	background-color: black;
+	margin: 10px;
+	align-self: center;
+	justify-self: center;
+}
+
+.card-contents {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-shrink: 1;
+	width: auto;
+	height: min-content;
+	overflow: hidden;
+	padding-bottom: 5px;
+	padding: 30px;
+}
+
+.card-body .card-info {
+	display: flex;
+	flex-direction: column;
+	min-width: 100px;
+	width: auto;
+	height: 100%;
+	margin: 5px;
+	padding: 5px;
+	background-color: red;
+}
+.card-info {
+	min-width: 100px;
+}
+.card-body {
+	position: relative;
+	display: flex;
+	flex-grow: 1;
+	overflow: hidden;
+	justify-content: center;
+	background-color: #acacac;
+	min-width: 400px;
+	height: max-content;
+}
+
+.card-contents img {
+	object-fit:fill;
+}
+
+.courses-bar {
+	width: 100%;
+	height: 50px;
+	background-color: #60c3ff;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: right;
+	border-radius: 20px;
+}
+
+.courses-bar a {
+	padding: 7px;
+	display: block;
+
+	width: auto;
+	height: auto;
+}
+
+#course-description {
+	display: flex;
+	width: 80%;
+	height: auto;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 20px;
+	background-color: #e9e9e9;
+	font-family: 'BebasNeue', sans-serif;
+	font-size: 18px;
 }
 
 #footer {
-	width: 90%;
-	border: 4px solid red;
+	width: 100%;
+	height: 100px;
+	bottom: 0;
 	background-color: black;
-	color: white;
-	margin: 10px;
-	padding: 10px;
-	font-size: 18px;
-	font-weight: bold;
+	position: fixed;
+	z-index:1
+
 }
+
+/* Style form labels */
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+  }
+  
+  /* Style form inputs */
+  input[type="text"],
+  textarea,
+  input[type="datetime-local"] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+  }
+  
+  /* Style the submit button */
+  input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+  }
+  
+  /* Change the submit button color on hover */
+  input[type="submit"]:hover {
+	background-color: #45a049;
+  }

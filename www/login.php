@@ -1,12 +1,13 @@
 <?php
+	$pageTitle = "Login"; 
 	require_once("includes/preamble.php");
 
 	$loginResult = "";
 	if (isset($_POST["username"])) $loginResult = login();
 
-	$pageTitle = "Login: Simple VLE"; 
+	
 	require_once("includes/header.php");
-	require_once("includes/menu.php");
+
 ?>
 <div id="contents">
 	<?php
